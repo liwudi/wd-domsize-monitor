@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        #box {
+            width: 80%;
+            height: 80%;
+            border: 10px solid red;
+        }
+        .center{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .left{
+            width: 50%;
+            height: 300px;
+            background-color: blue;
+            float: left;
+        }
+        .right{
+            width: 50%;
+            height: 300px;
+            background-color: green;
+            float: left;
+        }
+    </style>
+</head>
+<body class="center">
+
+<div id="box">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+<button id="clear">clear</button>
+<script>
+    const elList = [];
+    let timer = 0;
+    function bind(el, next) {
+        let obj = {
+            el,
+            callback: next,
+            style: {
+                width: getStyle(el, 'width'),
+                height: getStyle(el, 'height'),
+            }
+        }
+        elList.push(obj);
+    }
+    function remove(el) {
+        elList.splice(elList.indexOf(el))
+        if (elList.indexOf(el) !== -1) {
+            elList.splice(elList.indexOf(el), 1);
+        }
+    }
+    timer = setInterval(() => {
+        for (let i = 0; i < elList.length; i++) {
+            let dom = elList[i].el
+            const style = {
+                width: getStyle(dom, 'width'),
+                height: getStyle(dom, 'height'),
+            }
+            if (!isEqul(style, elList[i].style)) {
+                elList[i].style = {
+                    width: style.width,
+                    height: style.height,
+                }
+                elList[i].callback && elList[i].callback();
+            }
+        }
+    }, 200)
+    function getStyle(ele,attr){
+        if(window.getComputedStyle){
+            return window.getComputedStyle(ele,null)[attr];
+        }
+        return ele.currentStyle[attr];
+    }
+    function isEqul(obj1, obj2) {
+        let isEqul = true;
+        for (var i in obj1) {
+            if (obj1[i] !== obj2[i]) {
+                isEqul = false;
+            }
+        }
+        return isEqul;
+    }
+
+
+    bind(document.getElementsByClassName('left')[0], function () {
+        console.log(123);
+    });
+    console.log(elList);
+</script>
+
+</body>
+</html>

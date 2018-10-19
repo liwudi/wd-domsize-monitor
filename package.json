@@ -1,0 +1,16 @@
+{
+  "name": "wd-domsize-monitor",
+  "version": "1.0.0",
+  "description": "a monitor of dom change",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dom",
+    "change",
+    "monitor"
+  ],
+  "author": "mapbar_front",
+  "license": "ISC"
+}
