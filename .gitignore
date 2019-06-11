@@ -25,4 +25,6 @@ hs_err_pid*
 .idea
 ./node_modules
 node_modules
+index.html
+package-lock.json
 
